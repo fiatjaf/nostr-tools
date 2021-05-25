@@ -35,7 +35,7 @@ export function relayPool(globalPrivateKey) {
           sub.sub({cb, filter}, id)
         ]),
       addRelay: relay => {
-        subControllers[relay.url] = relay.sub({cb, filter})
+        subControllers[relay.url] = relay.sub({filter, cb: event => cb(event, relay)})
       },
       removeRelay: relayURL => {
         if (relayURL in subControllers) {
